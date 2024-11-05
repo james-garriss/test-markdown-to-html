@@ -12,8 +12,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - run: npm i markdown-to-html-cli -g
-      - run: markdown-to-html --output baselines/aad.html
-      - run: markdown-to-html --source baselines/aad.md --output baselines/aad.html
+      - run: markdown-to-html --output love/aad.html
+      - run: markdown-to-html --source baselines/aad.md --output love/aad.html
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Changed files
