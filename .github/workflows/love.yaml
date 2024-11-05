@@ -13,6 +13,9 @@ jobs:
       - run: npm i markdown-to-html-cli -g
       - run: markdown-to-html --output baselines/aad.html
       - run: markdown-to-html --source baselines/aad.md --output baselines/aad.html
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Changed files
       # - name: Converts Markdown to HTML
       #   uses: jaywcjlove/markdown-to-html-cli@main
       #   with:
