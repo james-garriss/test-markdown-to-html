@@ -1,11 +1,10 @@
-name: Convert to HTML with Love
+name: Convert to HTML
 
 on:
   push
 
 jobs:
   use-love:
-    name: Convert to HTML
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,10 +26,12 @@ jobs:
       #     favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
   use-nate:
     runs-on: windows-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Convert Markdown to HTML
+      - name: Convert HTML
         uses: natescherer/markdown-to-html-with-github-style-action@v1
         with:
           path: baselines/aad.md
