@@ -1,0 +1,39 @@
+name: Convert to HTML
+
+on:
+  push
+
+jobs:
+  use-love:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - run: npm i markdown-to-html-cli -g
+      - run: markdown-to-html --output baselines/aad.html
+      - run: markdown-to-html --source baselines/aad.md --output baselines/aad.html
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Changed files
+      # - name: Converts Markdown to HTML
+      #   uses: jaywcjlove/markdown-to-html-cli@main
+      #   with:
+      #     source: baselines/aad.md
+      #     output: coverage/action.html
+      #     github-corners: https://github.com/jaywcjlove/markdown-to-html-cli
+      #     favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
+  use-cpav:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Convert markdown file to html
+        uses: Cpavrai/convert-markdown-to-html@v2
+        with:
+          directory: './baselines' # Default '.'
+          args: '-u UTF8 -c ghCompatibleHeaderId -c emoji -c tables' # Default ''
+    
