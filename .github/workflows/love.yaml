@@ -3,8 +3,6 @@ name: Convert to HTML with Love
 on:
   push
 
-permissions: read-all
-
 jobs:
   use-love:
     name: Convert to HTML
