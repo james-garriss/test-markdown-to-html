@@ -12,7 +12,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - run: npm i markdown-to-html-cli -g
-      - run: markdown-to-html --output love/aad.html
       - run: markdown-to-html --source baselines/aad.md --output love/aad.html
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
@@ -31,9 +30,25 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Convert markdown file to html
+      - name: Convert markdown to html
         uses: Cpavrai/convert-markdown-to-html@v2
         with:
           directory: './baselines' # The Default is '.'
-          args: '-u UTF8 -c ghCompatibleHeaderId -c emoji -c tables' # Default ''
-    
+          args: '-u UTF8 -c ghCompatibleHeaderId -c emoji -c tablese' # Default ''
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Changed files
+  use-bailey:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Convert markdown to html
+        uses: baileyjm02/markdown-to-pdf@v1
+        with:
+          input_dir: ./baselines
+          output_dir: ./bailey
+          build_html: true
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Changed files
