@@ -16,13 +16,6 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Changed files
-      # - name: Converts Markdown to HTML
-      #   uses: jaywcjlove/markdown-to-html-cli@main
-      #   with:
-      #     source: baselines/aad.md
-      #     output: coverage/action.html
-      #     github-corners: https://github.com/jaywcjlove/markdown-to-html-cli
-      #     favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
   use-cpav:
     runs-on: windows-latest
     permissions:
@@ -34,7 +27,7 @@ jobs:
         uses: Cpavrai/convert-markdown-to-html@v2
         with:
           directory: './baselines' # The Default is '.'
-          args: '-u UTF8 -c ghCompatibleHeaderId -c emoji -c tablese' # Default ''
+          args: '-u UTF8 -c ghCompatibleHeaderId -c emoji -c tablese cpav' # Default ''
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Changed files
@@ -49,7 +42,7 @@ jobs:
         uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: ./baselines
-          output_dir: ./bailey
+          output_dir: bailey
           build_html: true
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
