@@ -34,6 +34,6 @@ jobs:
       - name: Convert markdown file to html
         uses: Cpavrai/convert-markdown-to-html@v2
         with:
-          directory: './baselines' # Default '.'
+          directory: './baselines' # The Default is '.'
           args: '-u UTF8 -c ghCompatibleHeaderId -c emoji -c tables' # Default ''
     
