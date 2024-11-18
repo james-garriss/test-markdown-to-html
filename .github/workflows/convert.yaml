@@ -4,17 +4,18 @@ on:
   push
 
 jobs:
-  use-buss:
+  use-pandoc:
     runs-on: ubuntu-latest
+    container: 
+      image: pandoc/latex:latest
     permissions:
       contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install markdown-to-txt
+      - name: Run Pandoc
+        run: |
+          pandoc -f markdown -t txt -o "pandoc/add.txt" baselines/aad.md
   # This is the best one.
   use-love:
     runs-on: ubuntu-latest
