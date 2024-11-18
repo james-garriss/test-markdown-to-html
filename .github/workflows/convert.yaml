@@ -6,8 +6,8 @@ on:
 jobs:
   use-pandoc:
     runs-on: ubuntu-latest
-    container: 
-      image: pandoc/latex:latest
+    # container: 
+    #   image: pandoc/latex:latest
     permissions:
       contents: write
     steps:
