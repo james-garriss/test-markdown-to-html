@@ -17,6 +17,8 @@ jobs:
         with:
           args: >-
             --standalone
+            --from=markdown
+            --to=plain
             --output=pandoc/aad.txt
             baselines/aad.md
       - uses: actions/upload-artifact@v4
