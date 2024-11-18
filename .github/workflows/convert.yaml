@@ -20,6 +20,11 @@ jobs:
         uses: docker://pandoc/core:3.5
         with:
           args: --standalone --output=baselines/defender.html baselines/defender.md
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: text
+          path: baselines
       - name: Install HTML converter
         run: npm i markdown-to-html-cli -g
       - name: Convert to HTML
@@ -29,5 +34,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: output
+          name: html
           path: baselines
