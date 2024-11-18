@@ -4,43 +4,31 @@ on:
   push
 
 jobs:
-  to-text:
-    name: Convert to Text
+  convert:
+    name: Convert
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      # - name: Prepare Output Directories
-      #   run: |
-      #     for d in baselines/*/; do
-      #       echo $d
-      #       mkdir -p pandoc/$d
-      #     done
-      - name: Convert
+      - name: Prepare Output Directories
+        run: |
+          for d in baselines/*/; do
+            echo $d
+            mkdir -p pandoc/$d
+          done
+      - name: Convert to Text
         uses: docker://pandoc/core:3.5
         with:
           entrypoint: /bin/sh
-          args: -c "find baselines -iname '*.md' -type f -exec sh -c 'baselines ${0} --from markdown --to plain -o baselines/${0%.md}.txt' {} \;"
-      - uses: actions/upload-artifact@v4
-        with:
-          name: html
-          path: baselines
-  to-html:
-    name: Convert to HTML
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-      - name: Install converter
+          args: -c "find baselines -iname '*.md' -type f -exec sh -c 'pandoc ${0} --from markdown --to plain -o baselines/${0%.md}.txt' {} \;"
+      - name: Install HTML converter
         run: npm i markdown-to-html-cli -g
-      - name: Convert
+      - name: Convert to HTML
         run: markdown-to-html --source baselines/aad.md --output baselines/aad.html
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: text
+          name: output
           path: baselines
