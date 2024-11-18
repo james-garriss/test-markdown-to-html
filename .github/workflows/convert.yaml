@@ -22,6 +22,11 @@ jobs:
       #       --output=pandoc/aad.txt
       #       baselines/aad.md
       - run: find baselines -iname '*.md' -type f
+      - name: prepare output directories
+        run: |
+          for d in baselines/; do
+            mkdir -p pandoc/$d
+          done
       - name: convert md to docx
         uses: docker://pandoc/core:3.5
         with:
