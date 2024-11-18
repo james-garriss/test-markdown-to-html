@@ -1,4 +1,4 @@
-name: Convert to HTML
+name: Convert to Text and HTML
 
 on:
   push
@@ -25,7 +25,6 @@ jobs:
         with:
           name: output
           path: pandoc
-  # This is the best one.
   use-love:
     runs-on: ubuntu-latest
     permissions:
@@ -38,36 +37,3 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Changed files
-  # use-cpav:
-  #   runs-on: windows-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - name: Checkout Repo
-  #       uses: actions/checkout@v4
-  #     - name: Convert markdown to html
-  #       uses: Cpavrai/convert-markdown-to-html@v2
-  #       with:
-  #         directory: './baselines' # The Default is '.'
-  #         args: '-u UTF8 -c ghCompatibleHeaderId -c emoji -c tables cpav' # Default ''
-  #     - uses: stefanzweifel/git-auto-commit-action@v5
-  #       with:
-  #         commit_message: Changed files
-  # use-bailey:
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - name: Checkout Repo
-  #       uses: actions/checkout@v4
-  #     - name: Convert markdown to html
-  #       uses: baileyjm02/markdown-to-pdf@v1
-  #       with:
-  #         input_dir: ./baselines
-  #         output_dir: bailey/
-  #         build_html: true
-  #     - uses: stefanzweifel/git-auto-commit-action@v5
-  #       with:
-  #         commit_message: Changed files
-  #     - name: Adding markdown
-  #       run: echo '### Hello world! 🚀' >> $GITHUB_STEP_SUMMARY
