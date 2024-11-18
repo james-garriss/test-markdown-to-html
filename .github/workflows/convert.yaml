@@ -24,7 +24,7 @@ jobs:
       # - run: find baselines -iname '*.md' -type f
       - name: Prepare Output Directories
         run: |
-          for d in baselines/; do
+          for d in baselines/*/; do
             echo $d
             mkdir -p pandoc/$d
           done
@@ -32,7 +32,7 @@ jobs:
         uses: docker://pandoc/core:3.5
         with:
           entrypoint: /bin/sh
-          args: -c "find baselines -iname '*.md' -execdir echo '{}' -type f -exec sh -c 'pandoc ${0} -o pandoc/${0%.md}.txt' {} \;"
+          args: -c "find baselines -iname '*.md' -type f -exec sh -c 'pandoc ${0} -o pandoc/${0%.md}.txt' {} \;"
       - uses: actions/upload-artifact@v4
         with:
           name: baselines
