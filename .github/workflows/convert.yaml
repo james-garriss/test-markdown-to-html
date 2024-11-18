@@ -21,10 +21,11 @@ jobs:
       #       --to=plain
       #       --output=pandoc/aad.txt
       #       baselines/aad.md
-      - run: find baselines -iname '*.md' -type f
-      - name: prepare output directories
+      # - run: find baselines -iname '*.md' -type f
+      - name: Prepare Output Directories
         run: |
           for d in baselines/; do
+            echo $d
             mkdir -p pandoc/$d
           done
       - name: convert md to docx
