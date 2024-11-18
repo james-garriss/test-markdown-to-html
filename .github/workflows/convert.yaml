@@ -12,21 +12,20 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Prepare Output Directories
-        run: |
-          for d in baselines/*/; do
-            echo $d
-            mkdir -p pandoc/$d
-          done
-      - name: Convert to Text
+      - name: Convert AAD to Text
         uses: docker://pandoc/core:3.5
         with:
-          entrypoint: /bin/sh
-          args: -c "find baselines -iname '*.md' -type f -exec sh -c 'pandoc ${0} --from markdown --to plain -o baselines/${0%.md}.txt' {} \;"
+          args: --standalone --output=baselines/aad.html baselines/aad.md
+      - name: Convert Defender to Text
+        uses: docker://pandoc/core:3.5
+        with:
+          args: --standalone --output=baselines/defender.html baselines/defender.md
       - name: Install HTML converter
         run: npm i markdown-to-html-cli -g
       - name: Convert to HTML
-        run: markdown-to-html --source baselines/aad.md --output baselines/aad.html
+        run: |
+          markdown-to-html --source baselines/aad.md --output baselines/aad.html
+          markdown-to-html --source baselines/defender.md --output baselines/defender.html
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
