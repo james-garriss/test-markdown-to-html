@@ -25,7 +25,7 @@ jobs:
         uses: docker://pandoc/core:3.5
         with:
           entrypoint: /bin/sh
-          args: -c "find baselines/ -iname '*.md' -type f -exec sh -c 'pandoc ${0} -o pandoc/${0%.md}.txt' {} \;"
+          args: -c "find baselines/ -iname '*.md' -type f -exec sh -c 'pandoc ${0} -o pandoc/${0%.md}.txt'"
       - uses: actions/upload-artifact@v4
         with:
           name: baselines
