@@ -47,3 +47,5 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Changed files
+      - name: Adding markdown
+        run: echo '### Hello world! 🚀' >> $GITHUB_STEP_SUMMARY
