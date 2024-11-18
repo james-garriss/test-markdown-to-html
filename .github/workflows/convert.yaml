@@ -22,7 +22,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: output
-          path: output
+          path: pandoc
   # This is the best one.
   use-love:
     runs-on: ubuntu-latest
