@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Run Pandoc
         run: |
-          pandoc -f markdown -t txt -o "pandoc/add.txt" baselines/aad.md
+          pandoc -f markdown -t plain -o "pandoc/add.txt" baselines/aad.md
   # This is the best one.
   use-love:
     runs-on: ubuntu-latest
