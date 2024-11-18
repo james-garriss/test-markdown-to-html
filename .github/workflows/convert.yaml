@@ -29,8 +29,8 @@ jobs:
         run: npm i markdown-to-html-cli -g
       - name: Convert to HTML
         run: |
-          markdown-to-html --source baselines/aad.md --output baselines/aad.html
-          markdown-to-html --source baselines/defender.md --output baselines/defender.html
+          markdown-to-html --source baselines/aad.md --output baselines/html/aad.html
+          markdown-to-html --source baselines/defender.md --output baselines/html/defender.html
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
