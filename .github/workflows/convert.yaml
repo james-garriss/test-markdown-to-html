@@ -18,15 +18,15 @@ jobs:
       #       echo $d
       #       mkdir -p pandoc/$d
       #     done
-      - name: convert md to docx
+      - name: Convert
         uses: docker://pandoc/core:3.5
         with:
           entrypoint: /bin/sh
-          args: -c "find baselines -iname '*.md' -type f -exec sh -c 'pandoc ${0} --from markdown --to plain -o pandoc/${0%.md}.txt' {} \;"
+          args: -c "find baselines -iname '*.md' -type f -exec sh -c 'baselines ${0} --from markdown --to plain -o baselines/${0%.md}.txt' {} \;"
       - uses: actions/upload-artifact@v4
         with:
-          name: output
-          path: pandoc
+          name: html
+          path: baselines
   to-html:
     name: Convert to HTML
     runs-on: ubuntu-latest
@@ -35,8 +35,12 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - run: npm i markdown-to-html-cli -g
-      - run: markdown-to-html --source baselines/aad.md --output love/aad.html
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Changed files
+      - name: Install converter
+        run: npm i markdown-to-html-cli -g
+      - name: Convert
+        run: markdown-to-html --source baselines/aad.md --output baselines/aad.html
+      - name: Upload
+        uses: actions/upload-artifact@v4
+          with:
+          name: text
+          path: baselines
