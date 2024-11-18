@@ -15,7 +15,7 @@ jobs:
       - name: Convert AAD to Text
         uses: docker://pandoc/core:3.5
         with:
-          args: --standalone --output=baselines/aad.html baselines/aad.md
+          args: --standalone --output=baselines/aad.html output/aad.md
       - name: Convert Defender to Text
         uses: docker://pandoc/core:3.5
         with:
