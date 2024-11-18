@@ -4,30 +4,20 @@ on:
   push
 
 jobs:
-  use-pandoc:
+  to-text:
+    name: Convert to Text
     runs-on: ubuntu-latest
-    # container: 
-    #   image: pandoc/latex:latest
     permissions:
       contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      # - uses: docker://pandoc/core:3.5
-      #   with:
-      #     args: >-
-      #       --standalone
-      #       --from=markdown
-      #       --to=plain
-      #       --output=pandoc/aad.txt
-      #       baselines/aad.md
-      # - run: find baselines -iname '*.md' -type f
-      - name: Prepare Output Directories
-        run: |
-          for d in baselines/*/; do
-            echo $d
-            mkdir -p pandoc/$d
-          done
+      # - name: Prepare Output Directories
+      #   run: |
+      #     for d in baselines/*/; do
+      #       echo $d
+      #       mkdir -p pandoc/$d
+      #     done
       - name: convert md to docx
         uses: docker://pandoc/core:3.5
         with:
@@ -37,7 +27,8 @@ jobs:
         with:
           name: output
           path: pandoc
-  use-love:
+  to-html:
+    name: Convert to HTML
     runs-on: ubuntu-latest
     permissions:
       contents: write
