@@ -19,9 +19,10 @@ jobs:
             --standalone
             --output=pandoc/aad.txt
             baselines/aad.md
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: actions/upload-artifact@v4
         with:
-          commit_message: Changed files
+          name: output
+          path: output
   # This is the best one.
   use-love:
     runs-on: ubuntu-latest
