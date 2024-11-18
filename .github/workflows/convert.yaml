@@ -13,9 +13,12 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Run Pandoc
-        run: |
-          pandoc -f markdown -t plain -o "pandoc/add.txt" baselines/aad.md
+      - uses: docker://pandoc/core:3.5
+        with:
+          args: >-
+            --standalone
+            --output=pandoc/aad.txt
+            baselines/aad.md
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Changed files
